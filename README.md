@@ -13,13 +13,32 @@
 
 ### 使用说明
 
-下载代码后将"cmcctts"文件夹复制到项目根目录的"addons"目录下
+下载插件代码并将`cmcctts`文件夹复制到项目根目录的`addons`目录下
 
 打开项目后台在本地插件列表找到本插件并配置相关参数
 
 ![config](docs/config.png)
 
-### 感谢
+完成配置后即可点击插件标题打开示例页面测试配置结果
+
+** 代码调用示例: **
+
+```
+
+$cmcctts = new \addons\cmcctts\library\Cmcctts();
+$ret = $cmcctts->template($template)->cmccVoice($mobile,$param);
+if ($ret) {
+    $this->success("操作成功");
+} else {
+    $this->error("操作失败！失败原因：" . $cmcctts->getError());
+}
+
+```
+
+> 详细内容参考插件目录下controller/Index.php文件
+
+
+### 特别感谢
 
 FastAdmin:[https://github.com/karsonzhang/fastadmin](https://github.com/karsonzhang/fastadmin)
 
