@@ -1,5 +1,9 @@
 # 语音通知/语音验证码插件
 
+<div align="center">
+    <img src="docs/cover.jpg" width="450" >
+</div>
+
 ### 插件说明
 
 本插件用于FastAdmin框架,用于快速对接中国移动能力开放平台语音通知产品,仅配置必要参数即可完成对接.
@@ -47,3 +51,4 @@ FastAdmin:[https://github.com/karsonzhang/fastadmin](https://github.com/karsonzh
 ### 版权信息
 
 本插件遵循Apache2开源协议发布，并提供免费使用。
+
