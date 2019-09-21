@@ -40,13 +40,13 @@ class Index extends Controller
         $replayTimes = $replayTimes ? $replayTimes : $config['replayTimes'];
 
         $param = $this->request->post('param');
-        if($param){
-          $param = htmlspecialchars_decode($param);
-          $param = json_decode($param,TRUE);
+        if ($param) {
+            $param = htmlspecialchars_decode($param);
+            $param = json_decode($param, true);
         }
 
         $cmcctts = new \addons\cmcctts\library\Cmcctts();
-        $ret = $cmcctts->template($template)->replay($replayTimes)->cmccVoice($mobile,$param);
+        $ret = $cmcctts->template($template)->replay($replayTimes)->cmccVoice($mobile, $param);
         if ($ret) {
             $this->success("操作成功");
         } else {

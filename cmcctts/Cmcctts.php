@@ -17,7 +17,6 @@ class Cmcctts extends Addons
      */
     public function install()
     {
-        
         return true;
     }
 
@@ -27,7 +26,6 @@ class Cmcctts extends Addons
      */
     public function uninstall()
     {
-        
         return true;
     }
 
@@ -37,7 +35,6 @@ class Cmcctts extends Addons
      */
     public function enable()
     {
-        
         return true;
     }
 
@@ -47,22 +44,42 @@ class Cmcctts extends Addons
      */
     public function disable()
     {
-        
         return true;
     }
 
+
     /**
-     * 实现钩子方法
-     * @return mixed
+     * 发送行为
+     * @param Sms $params
+     * @return  boolean
      */
-    public function testhook($param)
+    public function smsSend(&$params)
     {
-        // 调用钩子时候的参数信息
-        print_r($param);
-        // 当前插件的配置信息，配置信息存在当前目录的config.php文件中，见下方
-        print_r($this->getConfig());
-        // 可以返回模板，模板文件默认读取的为插件目录中的文件。模板名不能为空！
-        //return $this->fetch('view/info');
+        $config = get_addon_config('cmcctts');
+        if (!$config['sendsyscode']) {
+            return true;
+        }
+        $cmcctts = new library\Cmcctts();
+        if (!empty($config['template'][$params->event])) {//模板未配置则使用默认模板
+            $ttsTemplateId = $config['template'][$params->event];
+        } else {
+            $ttsTemplateId = $config['ttsTemplateId'];
+        }
+        $result = $cmcctts->template($ttsTemplateId)->cmccVoice(
+            $params->mobile,
+            ['code' => $params->code]
+        );
+        return $result;
     }
 
+
+    /**
+     * 检测验证是否正确
+     * @param Sms $params
+     * @return  boolean
+     */
+    public function smsCheck(&$params)
+    {
+        return true;
+    }
 }
